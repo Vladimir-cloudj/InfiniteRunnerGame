@@ -1,2 +1,2 @@
 # InfiniteRunnerGame
-this is a simple game: infinite runner
+this is a simple game: TikTacToe
