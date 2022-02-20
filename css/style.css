@@ -1,0 +1,124 @@
+* {margin: 0; padding: 0;}
+
+body{
+	font-family: 'Arial', sans-serif;
+}
+
+.content {
+    height: 70vh;
+	width: 96%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    margin: 50px;
+    font-family: sans-serif;
+    background: #e4e9ed;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: auto;
+}
+#field {
+    width: 210px;
+    /* border: 1px solid #000; */
+    margin: 0 auto;
+    font-size: 0;
+}
+
+.cell {
+	background-color: #78bec5;
+	border-radius: 14px;
+	cursor: pointer;
+	color: #fff;
+	margin: 5px;
+
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  display: inline-block;
+  font-size: 26px;
+  /* border: 1px solid #000; */
+  cursor: pointer;
+  vertical-align: middle;
+  transition: all .3s;
+}
+
+.cell:hover {
+  background-color: #3d4250;
+}
+
+.currentPlayer {
+    width: auto;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+}
+
+.results {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+}
+
+.results table {
+    border-collapse: collapse;
+}
+
+.results table, .results th, .results td {
+    border: 1px solid #3d4250;    
+    padding: 5px;
+    text-align: center;
+}
+
+#stats{
+    margin: 10px;
+}
+
+/* -------------------------------------------- */
+.footer {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    font-size: 20px;
+    line-height: 50px;
+    padding: 30px 15px 0px 15px;
+  }
+  
+  .footer__leftside {
+    display: flex;
+    margin-left: 5px;
+  }
+  
+  .footer__year {
+    margin-left: 20px;
+  }
+  
+  .footer__github-link {
+      color: #24334e;
+    margin-left: 20px;
+    transition: 0.3s ease-out;
+  }
+  
+  .footer__github-link:hover {
+    filter: invert(26%) sepia(15%) saturate(638%) hue-rotate(7deg) brightness(92%) contrast(87%);
+  }
+  
+  
+  .footer__middleside {
+    margin-left: 19px;
+  }
+  
+  .footer__rsschool-link {
+      margin-right: 20px;
+      color: #24334e;
+    transition: 0.3s ease-out;
+  }
+  
+  .footer__rsschool-link:hover {
+    filter: invert(26%) sepia(15%) saturate(638%) hue-rotate(7deg) brightness(92%) contrast(87%);
+  }

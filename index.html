@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tik Tak Toe</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="content">
+
+        
+        <div class="container">
+            <div class="currentPlayer">
+                <span>Now move: <span id="currentPlayer">X</span></span>
+            </div>
+            <div id="field"></div>
+        </div>
+        
+
+        <div class="results">
+            <table>
+                <th colspan="2">Statistics</th>
+                <tr>
+                    <td>win X</td>
+                    <td><span id="sX">0</span></td>
+                </tr>
+                <tr>
+                    <td>win O</td>
+                    <td><span id="sO">0</span></td>
+                </tr>
+                <tr>
+                    <td>tie</td>
+                    <td><span id="sD">0</span></td>
+                </tr>
+            </table>
+				<table  id="stats">
+					<th colspan="2">Statistics last 10 games</th>
+						<tr>
+                            <td>1</td>
+							<td><span id="statresult1"></span></td>
+						</tr>
+                        <tr>
+                            <td>2</td>
+							<td><span id="statresult2"></span></td>
+						</tr>
+				</table>
+        </div>
+
+        
+
+        
+    </div>
+    <footer class="footer">
+        <div class="footer__leftside">
+          <p class="footer__copyright">©</p>
+          <p class="footer__year">2022</p>
+          <a href="https://github.com/Vladimir-cloudj" class="footer__github-link">github</a>
+        </div>
+        <div class="footer__middleside">
+          <a href="https://rs.school/js-stage0/" class="footer__rsschool-link">
+                    <img src="img/rs_school_js.svg" alt="logo-school" width="256px" height="48px"></a>
+        </div>
+      </footer>
+
+      <script src="js/script.js"></script>
+</body>
+</html>
