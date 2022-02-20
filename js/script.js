@@ -1,7 +1,7 @@
 const field = document.getElementById('field');
 const cell = document.getElementsByClassName('cell');
 let currentPlayer = document.getElementById('currentPlayer');
-let statresult1 = document.getElementById('statresult1')
+// let statresult1 = document.getElementById('statresult1')
 
 var player = "x";
 var results = {
@@ -46,10 +46,15 @@ function cellClick() {
     }
     
     if(checkWin(data)) {
+        locStorStats(res, player);
+        
         results[player] += 1;
         restart("Win: " + player);
-        locStorStats(res);
-        statresult1.innerHTML = "Win: " + player;
+        
+
+
+
+        
         // localStorage.setItem('1', player);
         res++
         // -------------------
@@ -63,6 +68,8 @@ function cellClick() {
         }
         if(draw) {
             results.d += 1;
+            // localStorage.removeItem("tie", results.d);
+            // localStorage.setItem("tie", results.d);
             restart("Tie");
             res++
             // --------------
@@ -80,13 +87,49 @@ function cellClick() {
     currentPlayer.innerHTML = player.toUpperCase();
 }
 
-function locStorStats(res) { 
-    localStorage.user = JSON.stringify({
+window.addEventListener('load', getresultTieLocalStorage);
+function getresultTieLocalStorage() {
+    if (results.d + results.x + results.o <= 10) {
+        results.d = localStorage.getItem("tie")
+        // console.log(results.d);
         
-        [res]: player
-    })
-    statresult1.innerHTML = JSON.parse(localStorage.user)
-    localStorage.setItem([res], player);
+    
+        results.x = localStorage.getItem("x")
+        console.log(results.x);
+    
+        results.o = localStorage.getItem("o")
+        console.log(results.o);
+    } else {
+        results.x = 0
+        results.o = 0
+        results.d = 0
+    }
+
+    updateresults();
+}
+let statresult1 = document.querySelectorAll('.statresult1');
+// let itemsArray = []
+function locStorStats(res,player) {
+    if (res <= 5) {
+        localStorage.setItem(res, player);
+        // console.log("less" + res);
+        statresult1[res-1].innerHTML = player;        
+    } else {
+        window.res = 1;
+        localStorage.removeItem(res-1, player);
+        // localStorage.setItem(res, player);
+        // statresult1[res-1].innerHTML = player;
+        // console.log("more" + res);
+        return locStorStats(res-1,player);
+    }
+    // res++
+    
+    // localStorage.setItem(JSON.stringify(itemsArray)) 
+    // --------------------------------
+    // statresult1.innerHTML = JSON.parse(localStorage.user)
+    // localStorage.setItem([res], player);
+    // ------------------------------
+    
 }
 
 
@@ -123,13 +166,32 @@ function restart(text) {
     // ------------------- 
     updateresults();
     
+
+
+    if (results.player = 'x') {
+        localStorage.setItem(player, results.x);
+    }
+    // if (results.player = 'o') {
+        localStorage.setItem(player, results.o);
+    // }    
+
 }
-// player = "x";
+
+
+
 
 
 function updateresults() {
+    
     document.getElementById('sX').innerHTML = results.x;
     document.getElementById('sO').innerHTML = results.o;
     document.getElementById('sD').innerHTML = results.d;
     
 }
+
+
+
+
+
+
+console.log("Визуал сильно не старался сделать т к долго ломал голову над основным алгоритмом. Часть пунктов не выполненно т к не хватило времени для их выполнения");
