@@ -1,7 +1,10 @@
 const field = document.getElementById('field');
 const cell = document.getElementsByClassName('cell');
 let currentPlayer = document.getElementById('currentPlayer');
-// let statresult1 = document.getElementById('statresult1')
+let statresult1 = document.querySelectorAll('.statresult1');
+
+let score_audio = new Audio();
+score_audio.src = 'audio/score.mp3'
 
 var player = "x";
 var results = {
@@ -19,6 +22,19 @@ var winIndex = [
     [1,5,9],
     [3,5,7]
 ];
+
+let final = {
+    1: '',
+    2: '',
+    3: '',
+    4: '',
+    5: '',
+    6: '',
+    7: '',
+    8: '',
+    9: '',
+    10: '',
+};
 
 for(let i = 1; i <= 9; i++) {
     field.innerHTML += "<div class='cell' pos=" + i + "></div>";
@@ -49,13 +65,10 @@ function cellClick() {
         locStorStats(res, player);
         
         results[player] += 1;
-        restart("Win: " + player);
+        restart("Win: " + player);               
+        // localStorage.setItem(`${player}`, player);
+        // localStorage.setItem(`${player}`, results.`${player}`);
         
-
-
-
-        
-        // localStorage.setItem('1', player);
         res++
         // -------------------
         player = 'x';
@@ -68,14 +81,14 @@ function cellClick() {
         }
         if(draw) {
             results.d += 1;
-            // localStorage.removeItem("tie", results.d);
-            // localStorage.setItem("tie", results.d);
-            restart("Tie");
-            res++
+            // localStorage.setItem('d', results.d);
             // --------------
             player = 'x';
             currentPlayer.innerHTML = player.toUpperCase();
             // ----------------
+            restart("Tie");
+            res++
+            
         }
     }
     
@@ -89,47 +102,40 @@ function cellClick() {
 
 window.addEventListener('load', getresultTieLocalStorage);
 function getresultTieLocalStorage() {
-    if (results.d + results.x + results.o <= 10) {
-        results.d = localStorage.getItem("tie")
-        // console.log(results.d);
-        
-    
-        results.x = localStorage.getItem("x")
-        console.log(results.x);
-    
+    if (+results.d + +results.x + +results.o <= 10) {        
+        results.d = localStorage.getItem("tie")                
+        results.x = localStorage.getItem("x")       
         results.o = localStorage.getItem("o")
-        console.log(results.o);
+        // localStorage.getItem("tie")
     } else {
-        results.x = 0
-        results.o = 0
-        results.d = 0
+        // results.d = localStorage.removeItem("tie")
+        // results.x = localStorage.removeItem("x")
+        // results.o = localStorage.removeItem("o")
+        // localStorage.removeItem("tie")
+        // localStorage.removeItem("x")
+        // localStorage.removeItem("o")
+        // results.x = 0
+        // results.o = 0
+        // results.d = 0
     }
-
     updateresults();
 }
-let statresult1 = document.querySelectorAll('.statresult1');
+
+
+
 // let itemsArray = []
 function locStorStats(res,player) {
-    if (res <= 5) {
+    if (res <= 10) {
+        localStorage.removeItem(res, player);
         localStorage.setItem(res, player);
-        // console.log("less" + res);
-        statresult1[res-1].innerHTML = player;        
+        statresult1[res-1].innerHTML = player;
     } else {
         window.res = 1;
+        res = 1;
         localStorage.removeItem(res-1, player);
-        // localStorage.setItem(res, player);
-        // statresult1[res-1].innerHTML = player;
-        // console.log("more" + res);
-        return locStorStats(res-1,player);
+        return locStorStats(res,player);
     }
-    // res++
-    
-    // localStorage.setItem(JSON.stringify(itemsArray)) 
-    // --------------------------------
-    // statresult1.innerHTML = JSON.parse(localStorage.user)
-    // localStorage.setItem([res], player);
-    // ------------------------------
-    
+    res++
 }
 
 
@@ -153,12 +159,22 @@ function checkWin(data) {
     return false;
 }
 
+
 function restart(text) {
-    
+    score_audio.play();
     alert(text);
     
     for(let i = 0; i < cell.length; i++) {
         cell[i].innerHTML = '';
+    }
+    if (results.player = 'x') {
+        localStorage.setItem(player, results.x);
+    } else
+    if (results.player = 'o') {
+        localStorage.setItem(player, results.o);
+    } else   
+    if (results.player = 'tie') {
+        localStorage.setItem(player, results.d);
     }
     // ------------------
     player = 'x';
@@ -167,14 +183,7 @@ function restart(text) {
     updateresults();
     
 
-
-    if (results.player = 'x') {
-        localStorage.setItem(player, results.x);
-    }
-    // if (results.player = 'o') {
-        localStorage.setItem(player, results.o);
-    // }    
-
+    
 }
 
 
@@ -182,16 +191,18 @@ function restart(text) {
 
 
 function updateresults() {
-    
+
+    for(let i = 1; i <= 10; i++) {
+        final[i] = localStorage.getItem(`${i}`, player);
+        statresult1[i-1].innerHTML = final[i];
+        // console.log(final[i]);
+        // console.log(statresult1[i-1]);
+    }
+
     document.getElementById('sX').innerHTML = results.x;
     document.getElementById('sO').innerHTML = results.o;
     document.getElementById('sD').innerHTML = results.d;
     
 }
 
-
-
-
-
-
-console.log("Визуал сильно не старался сделать т к долго ломал голову над основным алгоритмом. Часть пунктов не выполненно т к не хватило времени для их выполнения");
+console.log("Визуально проект слабый т к долго ломал голову над основным алгоритмом. Часть пунктов не выполненно т к не хватило времени для их выполнения");
